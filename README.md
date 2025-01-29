@@ -19,7 +19,7 @@ all listed in docker logs.
 curl -fsSL https://get.docker.com | sh
 ```
 
-Run my server software
+4. Run my server software
 ```
 docker pull ghcr.io/nottgy/easy-smtp-receiver:latest
 docker run --name ESR -p 25:25 -d ghcr.io/nottgy/easy-smtp-receiver
@@ -29,3 +29,17 @@ Check mail by running this command
 ```
 docker logs ESR
 ```
+
+## Updating/Restarting
+
+First stop container
+```
+docker stop ESR
+```
+
+Then remove container
+```
+docker rm ESR
+```
+
+then go back to the installation process from the step 4

@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"io"
 	"log"
-	"os"
+	//"os"
 
 	"github.com/emersion/go-smtp"
 )
@@ -68,7 +68,7 @@ func main() {
 	s.Addr = addr
 	s.Domain = "localhost"
 	s.AllowInsecureAuth = true
-	s.Debug = os.Stdout
+	//s.Debug = os.Stdout
 
 	log.Println("Starting SMTP server at", addr)
 	log.Fatal(s.ListenAndServe())
