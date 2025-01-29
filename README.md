@@ -21,7 +21,7 @@ curl -fsSL https://get.docker.com | sh
 
 Run my server software
 ```
-docker run --name ESR ghcr.io/nottgy/easy-smtp-receiver -p 50:50
+docker run --name ESR -p 50:50 ghcr.io/nottgy/easy-smtp-receiver
 ```
 
 Check mail by running this command
