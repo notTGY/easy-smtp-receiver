@@ -3,10 +3,10 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"io"
 	"log"
 	"os"
-  "fmt"
 
 	"github.com/emersion/go-smtp"
 )
@@ -23,9 +23,9 @@ func (bkd *backend) NewSession(c *smtp.Conn) (smtp.Session, error) {
 	return &session{}, nil
 }
 
-type session struct{
-  From string
-  To []string
+type session struct {
+	From string
+	To   []string
 }
 
 func (s *session) AuthPlain(username, password string) error {
