@@ -21,4 +21,4 @@ WORKDIR /
 
 COPY --from=build-stage /app/server /app/server
 
-ENTRYPOINT ["/bin/sh", "-c", "cd /app && ./server -l :25"]
+ENTRYPOINT ["/bin/sh", "-c", "cd /app && ./server"]

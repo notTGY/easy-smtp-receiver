@@ -6,15 +6,20 @@ import (
 	"fmt"
 	"io"
 	"log"
+  "strings"
+  "slices"
 	//"os"
 
 	"github.com/emersion/go-smtp"
 )
 
-var addr = "127.0.0.1:1025"
+var addr = ":25"
+
+var allowlistTo = ""
 
 func init() {
 	flag.StringVar(&addr, "l", addr, "Listen address")
+  flag.StringVar(&allowlistTo, "a", "", "allowed receiving email addresses")
 }
 
 type backend struct{}
@@ -33,7 +38,7 @@ func (s *session) AuthPlain(username, password string) error {
 }
 
 func (s *session) Mail(from string, opts *smtp.MailOptions) error {
-	fmt.Println("Mail from:", from)
+	//fmt.Println("Mail from:", from)
 	s.From = from
 	return nil
 }
@@ -48,7 +53,11 @@ func (s *session) Data(r io.Reader) error {
 	if b, err := io.ReadAll(r); err != nil {
 		return err
 	} else {
-		fmt.Println("Received message:", string(b))
+    if slices.IndexFunc(s.To, func (str string) bool {
+      return strings.HasSuffix(str, allowlistTo)
+    }) > -1 {
+      fmt.Println("Received message:", string(b))
+    }
 		// Тут происходит обработка письма
 		return nil
 	}
